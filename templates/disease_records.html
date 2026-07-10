@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Disease Records</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<link
+rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+<div class="row">
+
+<!-- Sidebar -->
+
+<div class="col-md-2 sidebar">
+
+<h2 class="logo">
+
+🐟 AquaFarm
+
+</h2>
+
+<ul>
+
+<li>
+
+<a href="/dashboard">
+
+🏠 Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/ponds">
+
+🐟 Pond Management
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/growthrecords">
+
+📈 Fish Growth
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/feedingrecords">
+
+🍽 Feeding
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/waterqualityrecords">
+
+💧 Water Quality
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/diseaserecords"
+class="active">
+
+🦠 Disease Management
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/logout">
+
+🚪 Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- Main Content -->
+
+<div class="col-md-10 main-content">
+
+<h2 class="mb-4">
+
+🦠 Disease Management
+
+</h2>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<div class="dashboard-card">
+
+<h3>
+
+{{ total_records }}
+
+</h3>
+
+<p>
+
+Total Disease Records
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="dashboard-card">
+
+<h3>
+
+{{ recovered }}
+
+</h3>
+
+<p>
+
+Recovered Cases
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-md-6">
+
+<a
+href="/disease"
+class="btn btn-danger">
+
+<i class="bi bi-plus-circle"></i>
+
+Add Disease Record
+
+</a>
+
+</div>
+
+<div class="col-md-6">
+
+<input
+type="text"
+class="form-control"
+placeholder="Search (Coming Soon)">
+
+</div>
+
+</div>
+
+<div class="card mt-4 shadow">
+
+<div class="card-body">
+
+<div class="table-responsive">
+
+<table
+class="table table-bordered table-hover">
+
+<thead class="table-danger">
+
+<tr>
+
+<th>ID</th>
+
+<th>Pond</th>
+
+<th>Disease</th>
+
+<th>Detection Date</th>
+
+<th>Treatment</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for d in diseases %}
+
+<tr>
+
+<td>{{ d[0] }}</td>
+
+<td>{{ d[1] }}</td>
+
+<td>{{ d[2] }}</td>
+
+<td>{{ d[3] }}</td>
+
+<td>{{ d[4] }}</td>
+
+<td>
+
+{% if d[5]=="Recovered" %}
+
+<span class="badge bg-success">
+
+Recovered
+
+</span>
+
+{% elif d[5]=="Under Treatment" %}
+
+<span class="badge bg-warning text-dark">
+
+Under Treatment
+
+</span>
+
+{% else %}
+
+<span class="badge bg-danger">
+
+Critical
+
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+    <a href="/editdisease/{{ d[0] }}"
+class="btn btn-warning btn-sm">
+
+<i class="bi bi-pencil-square"></i>
+
+Edit
+
+</a>
+
+<a href="/deletedisease/{{ d[0] }}"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Are you sure you want to delete this disease record?')">
+
+<i class="bi bi-trash"></i>
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% if diseases|length == 0 %}
+
+<tr>
+
+<td colspan="7" class="text-center">
+
+<h5 class="text-danger">
+
+No Disease Records Found
+
+</h5>
+
+<p>
+
+Click <strong>Add Disease Record</strong> to create your first disease record.
+
+</p>
+
+</td>
+
+</tr>
+
+{% endif %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-md-6">
+
+<a href="/dashboard"
+class="btn btn-primary">
+
+<i class="bi bi-house-fill"></i>
+
+Back to Dashboard
+
+</a>
+
+</div>
+
+<div class="col-md-6 text-end">
+
+<a href="/disease"
+class="btn btn-danger">
+
+<i class="bi bi-plus-circle-fill"></i>
+
+Add Disease Record
+
+</a>
+
+</div>
+
+</div>
+
+<!-- Disease Guidelines -->
+
+<div class="card shadow mt-4">
+
+<div class="card-header bg-danger text-white">
+
+<h4>
+
+🦠 Disease Prevention Guidelines
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<h5>
+
+Maintain Water Quality
+
+</h5>
+
+<p>
+
+Check pH, oxygen and ammonia levels regularly.
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h5>
+
+Proper Feeding
+
+</h5>
+
+<p>
+
+Provide quality feed and avoid overfeeding.
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h5>
+
+Regular Monitoring
+
+</h5>
+
+<p>
+
+Observe fish daily for signs of disease.
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="alert alert-success">
+
+<b>Tip:</b> Early detection and timely treatment can prevent major losses in fish farming.
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<hr>
+
+<div class="text-center">
+
+<h5>
+
+🐟 Smart AquaFarm
+
+</h5>
+
+<p>
+
+Disease Management Module
+
+</p>
+
+<p>
+
+Developed using Flask • Oracle Database • Bootstrap 5
+
+</p>
+
+<p>
+
+© 2026 Smart AquaFarm. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

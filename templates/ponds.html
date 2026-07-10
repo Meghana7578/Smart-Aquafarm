@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>View Ponds</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+<div class="row">
+
+<!-- Sidebar -->
+
+<div class="col-md-2 sidebar">
+
+<h2 class="logo">
+
+🐟 AquaFarm
+
+</h2>
+
+<ul>
+
+<li>
+
+<a href="/dashboard">
+
+🏠 Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/addpond">
+
+➕ Add Pond
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/ponds" class="active">
+
+📋 View Ponds
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+📈 Fish Growth
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+🍽 Feeding Schedule
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+💧 Water Quality
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+🦠 Disease Management
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+💰 Market Prices
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+📄 Reports
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/logout">
+
+🚪 Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+
+
+<!-- Main -->
+
+<div class="col-md-10 main-content">
+
+<div class="header">
+
+<h1>
+
+📋 View Ponds
+
+</h1>
+
+<p>
+
+Manage all ponds here.
+
+</p>
+
+</div>
+
+
+
+<div class="row mt-4">
+
+<div class="col-md-6">
+
+<a href="/addpond"
+
+class="btn btn-success">
+
+<i class="bi bi-plus-circle"></i>
+
+Add New Pond
+
+</a>
+
+</div>
+
+<div class="col-md-6">
+
+<input
+
+type="text"
+
+class="form-control"
+
+placeholder="Search Pond (Coming Soon)">
+
+</div>
+
+</div>
+
+
+
+<div class="card mt-4 shadow">
+
+<div class="card-body">
+
+<h3>
+
+Pond Details
+
+</h3>
+
+<hr>
+
+<div class="table-responsive">
+
+<table
+
+class="table table-bordered table-hover table-striped">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>ID</th>
+
+<th>Pond Name</th>
+
+<th>Species</th>
+
+<th>Area</th>
+
+<th>Fish Count</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for pond in ponds %}
+
+<tr>
+
+<td>
+
+{{ pond[0] }}
+
+</td>
+
+<td>
+
+{{ pond[1] }}
+
+</td>
+
+<td>
+
+{{ pond[2] }}
+
+</td>
+
+<td>
+
+{{ pond[3] }}
+
+</td>
+
+<td>
+
+{{ pond[4] }}
+
+</td>
+
+<td>
+    <a href="/editpond/{{ pond[0] }}" class="btn btn-warning btn-sm">
+
+    <i class="bi bi-pencil-square"></i>
+
+    Edit
+
+</a>
+
+<a href="/deletepond/{{ pond[0] }}"
+   class="btn btn-danger btn-sm"
+   onclick="return confirm('Are you sure you want to delete this pond?')">
+
+    <i class="bi bi-trash"></i>
+
+    Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% if ponds|length == 0 %}
+
+<tr>
+
+<td colspan="6" class="text-center">
+
+No Pond Records Found
+
+</td>
+
+</tr>
+
+{% endif %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="text-center mt-4">
+
+<a href="/dashboard" class="btn btn-primary">
+
+<i class="bi bi-house-door-fill"></i>
+
+Back to Dashboard
+
+</a>
+
+</div>
+
+
+
+<footer class="mt-5 text-center">
+
+<hr>
+
+<p>
+
+© 2026 Smart AquaFarm
+
+</p>
+
+</footer>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart AquaFarm</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+background:linear-gradient(135deg,#0077b6,#00b4d8,#90e0ef);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+}
+
+.hero{
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(15px);
+
+padding:60px;
+
+border-radius:25px;
+
+width:900px;
+
+max-width:90%;
+
+text-align:center;
+
+color:white;
+
+box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+}
+
+.hero h1{
+
+font-size:52px;
+
+font-weight:bold;
+
+margin-bottom:20px;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+margin-bottom:40px;
+
+opacity:.95;
+
+}
+
+.logo{
+
+font-size:90px;
+
+margin-bottom:20px;
+
+}
+
+.btn-custom{
+
+width:180px;
+
+height:55px;
+
+font-size:20px;
+
+font-weight:bold;
+
+border-radius:10px;
+
+margin:10px;
+
+}
+
+.features{
+
+margin-top:45px;
+
+display:flex;
+
+justify-content:center;
+
+gap:30px;
+
+flex-wrap:wrap;
+
+}
+
+.feature{
+
+background:rgba(255,255,255,.15);
+
+padding:20px;
+
+border-radius:15px;
+
+width:180px;
+
+}
+
+.feature i{
+
+font-size:40px;
+
+margin-bottom:10px;
+
+}
+
+footer{
+
+margin-top:40px;
+
+font-size:14px;
+
+opacity:.9;
+
+}
+
+@media(max-width:768px){
+
+.hero{
+
+padding:35px;
+
+}
+
+.hero h1{
+
+font-size:36px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
+.btn-custom{
+
+width:100%;
+
+}
+
+.features{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<div class="logo">
+
+🐟
+
+</div>
+
+<h1>
+
+Welcome to Smart AquaFarm
+
+</h1>
+
+<p>
+
+Smart Aquaculture Farm Management System
+
+</p>
+
+<a href="/login" class="btn btn-primary btn-custom">
+
+<i class="bi bi-box-arrow-in-right"></i>
+
+Login
+
+</a>
+
+<a href="/register" class="btn btn-success btn-custom">
+
+<i class="bi bi-person-plus-fill"></i>
+
+Register
+
+</a>
+
+<div class="features">
+
+<div class="feature">
+
+<i class="bi bi-water"></i>
+
+<h5>Pond Management</h5>
+
+</div>
+
+<div class="feature">
+
+<i class="bi bi-graph-up-arrow"></i>
+
+<h5>Fish Growth</h5>
+
+</div>
+
+<div class="feature">
+
+<i class="bi bi-droplet-fill"></i>
+
+<h5>Water Quality</h5>
+
+</div>
+
+<div class="feature">
+
+<i class="bi bi-bar-chart-fill"></i>
+
+<h5>Reports</h5>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 Smart AquaFarm | Flask • Oracle Database • Bootstrap 5
+
+</footer>
+
+</div>
+
+</body>
+
+</html>

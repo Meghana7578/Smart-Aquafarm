@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart AquaFarm Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+<div class="logo">
+
+<h2>🐟 Smart AquaFarm</h2>
+
+</div>
+
+<ul>
+
+<li>
+<a href="/dashboard" class="active">
+<i class="bi bi-speedometer2"></i>
+Dashboard
+</a>
+</li>
+
+<li>
+<a href="/addpond">
+<i class="bi bi-plus-circle-fill"></i>
+Add Pond
+</a>
+</li>
+
+<li>
+<a href="/ponds">
+<i class="bi bi-water"></i>
+Pond Management
+</a>
+</li>
+
+<li>
+<a href="/growthrecords">
+<i class="bi bi-graph-up-arrow"></i>
+Fish Growth
+</a>
+</li>
+
+<li>
+<a href="/feedingrecords">
+<i class="bi bi-basket2-fill"></i>
+Feeding Schedule
+</a>
+</li>
+
+<li>
+<a href="/waterqualityrecords">
+<i class="bi bi-droplet-fill"></i>
+Water Quality
+</a>
+</li>
+
+<li>
+<a href="/diseaserecords">
+<i class="bi bi-bug-fill"></i>
+Disease Management
+</a>
+</li>
+
+<li>
+<a href="/marketrecords">
+<i class="bi bi-currency-rupee"></i>
+Market Prices
+</a>
+</li>
+
+<li>
+<a href="/reports">
+<i class="bi bi-bar-chart-fill"></i>
+Reports & Analytics
+</a>
+</li>
+
+<li>
+<a href="/logout">
+<i class="bi bi-box-arrow-right"></i>
+Logout
+</a>
+</li>
+
+</ul>
+
+</div>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<div class="main-content">
+
+<div class="topbar">
+
+<h2>Dashboard</h2>
+
+<p>Welcome to Smart AquaFarm 🌿</p>
+
+</div>
+
+<!-- ================= DASHBOARD CARDS ================= -->
+
+<div class="row mt-4">
+
+<div class="col-lg-3 col-md-6">
+
+<div class="dashboard-card">
+
+<i class="bi bi-water card-icon"></i>
+
+<h2>{{ total_ponds }}</h2>
+
+<p>Total Ponds</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="dashboard-card">
+
+<i class="bi bi-fish card-icon"></i>
+
+<h2>{{ total_fish }}</h2>
+
+<p>Total Fish</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="dashboard-card">
+
+<i class="bi bi-plus-circle-fill card-icon"></i>
+
+<h2>{{ latest_pond }}</h2>
+
+<p>Latest Pond</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="dashboard-card">
+
+<i class="bi bi-check-circle-fill card-icon"></i>
+
+<h2>Active</h2>
+
+<p>System Status</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= QUICK ACTIONS ================= -->
+
+<h3 class="mt-5 mb-4">
+
+Quick Actions
+
+</h3>
+
+<div class="row g-4">
+
+<div class="col-lg-3 col-md-6">
+
+<a href="/addpond" class="text-decoration-none">
+
+<div class="action-card">
+
+<i class="bi bi-plus-circle-fill"></i>
+
+<h4>Add Pond</h4>
+
+<p>Register New Pond</p>
+
+</div>
+
+</a>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<a href="/growthrecords" class="text-decoration-none">
+
+<div class="action-card">
+
+<i class="bi bi-graph-up-arrow"></i>
+
+<h4>Fish Growth</h4>
+
+<p>Manage Growth Records</p>
+
+</div>
+
+</a>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<a href="/feedingrecords" class="text-decoration-none">
+
+<div class="action-card">
+
+<i class="bi bi-basket2-fill"></i>
+
+<h4>Feeding Schedule</h4>
+
+<p>Manage Feeding Schedule</p>
+
+</div>
+
+</a>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<a href="/waterqualityrecords" class="text-decoration-none">
+
+<div class="action-card">
+
+<i class="bi bi-droplet-fill"></i>
+
+<h4>Water Quality</h4>
+
+<p>Monitor Water Quality</p>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="row g-4 mt-1">
+
+<div class="col-lg-3 col-md-6">
+
+<a href="/diseaserecords" class="text-decoration-none">
+
+<div class="action-card">
+
+<i class="bi bi-bug-fill"></i>
+
+<h4>Disease Management</h4>
+
+<p>Manage Fish Diseases</p>
+
+</div>
+
+</a>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<a href="/marketrecords" class="text-decoration-none">
+
+<div class="action-card">
+
+<i class="bi bi-currency-rupee"></i>
+
+<h4>Market Prices</h4>
+
+<p>Daily Fish Prices</p>
+
+</div>
+
+</a>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<a href="/reports" class="text-decoration-none">
+
+<div class="action-card">
+
+<i class="bi bi-bar-chart-fill"></i>
+
+<h4>Reports</h4>
+
+<p>Analytics Dashboard</p>
+
+</div>
+
+</a>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="action-card">
+
+<i class="bi bi-person-circle"></i>
+
+<h4>Profile</h4>
+
+<p>Coming Soon</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= RECENT ACTIVITIES ================= -->
+
+<div class="row mt-5">
+
+<div class="col-lg-8">
+
+<div class="activity-card">
+
+<h3>Recent Activities</h3>
+
+<hr>
+
+<table class="table table-hover">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Time</th>
+
+<th>Activity</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+  <tr>
+<td>Today</td>
+<td>New Pond Added : <b>{{ latest_pond_activity }}</b></td>
+<td>
+<span class="badge bg-success">
+Completed
+</span>
+</td>
+</tr>
+
+<tr>
+<td>Today</td>
+<td>Growth Record Updated : <b>{{ latest_growth }}</b></td>
+<td>
+<span class="badge bg-primary">
+Updated
+</span>
+</td>
+</tr>
+
+<tr>
+<td>Today</td>
+<td>Feeding Schedule Updated : <b>{{ latest_feeding }}</b></td>
+<td>
+<span class="badge bg-warning text-dark">
+Scheduled
+</span>
+</td>
+</tr>
+
+<tr>
+<td>Today</td>
+<td>Water Quality Checked : <b>{{ latest_water }}</b></td>
+<td>
+<span class="badge bg-info text-dark">
+Normal
+</span>
+</td>
+</tr>
+
+<tr>
+<td>Today</td>
+<td>Disease Record : <b>{{ latest_disease }}</b></td>
+<td>
+<span class="badge bg-danger">
+Alert
+</span>
+</td>
+</tr>
+
+<tr>
+<td>Today</td>
+<td>Market Price Updated : <b>{{ latest_market }}</b></td>
+<td>
+<span class="badge bg-success">
+Updated
+</span>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="activity-card">
+
+<h3>System Information</h3>
+
+<hr>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Application</th>
+
+<td>Smart AquaFarm</td>
+
+</tr>
+
+<tr>
+
+<th>Backend</th>
+
+<td>Flask (Python)</td>
+
+</tr>
+
+<tr>
+
+<th>Database</th>
+
+<td>Oracle 10g</td>
+
+</tr>
+
+<tr>
+
+<th>Frontend</th>
+
+<td>HTML • CSS • Bootstrap 5</td>
+
+</tr>
+
+<tr>
+
+<th>Status</th>
+
+<td>
+
+<span class="badge bg-success">
+
+Running Successfully
+
+</span>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= PROJECT PROGRESS ================= -->
+
+<h3 class="mt-5">
+
+Project Progress
+
+</h3>
+
+<div class="progress mt-3" style="height:30px;">
+
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+style="width:95%;">
+
+95% Completed
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<h5>Authentication</h5>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<h5>Pond Module</h5>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<h5>Growth Module</h5>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<h5>Feeding Module</h5>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row mt-3">
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<h5>Water Quality</h5>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<h5>Disease Module</h5>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<h5>Market Prices</h5>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<h5>Reports</h5>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</div>
+
+</div>
+
+</div>  
+<!-- ================= FARM STATUS ================= -->
+
+<div class="row mt-5">
+
+<div class="col-lg-6">
+
+<div class="activity-card">
+
+<h3>
+
+🐟 Farm Status
+
+</h3>
+
+<hr>
+
+<table class="table table-striped">
+
+<tr>
+
+<th>Total Ponds</th>
+
+<td>{{ total_ponds }}</td>
+
+</tr>
+
+<tr>
+
+<th>Total Fish</th>
+
+<td>{{ total_fish }}</td>
+
+</tr>
+
+<tr>
+
+<th>Latest Pond</th>
+
+<td>{{ latest_pond }}</td>
+
+</tr>
+
+<tr>
+
+<th>Application</th>
+
+<td>Smart AquaFarm</td>
+
+</tr>
+
+<tr>
+
+<th>Status</th>
+
+<td>
+
+<span class="badge bg-success">
+
+Running
+
+</span>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="activity-card">
+
+<h3>
+
+📢 Farm Tips
+
+</h3>
+
+<hr>
+
+<div class="alert alert-success">
+
+✔ Feed fish at the correct time every day.
+
+</div>
+
+<div class="alert alert-info">
+
+✔ Check water quality every morning.
+
+</div>
+
+<div class="alert alert-warning">
+
+✔ Monitor fish growth every week.
+
+</div>
+
+<div class="alert alert-danger">
+
+✔ Treat diseases immediately after detection.
+
+</div>
+
+<div class="alert alert-primary">
+
+✔ Update market prices daily.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= UPCOMING TASKS ================= -->
+
+<div class="activity-card mt-5">
+
+<h3>
+
+📅 Upcoming Tasks
+
+</h3>
+
+<hr>
+
+<table class="table table-hover">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Task</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Feed Fish</td>
+
+<td>
+
+<span class="badge bg-warning text-dark">
+
+Pending
+
+</span>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Check Water Quality</td>
+
+<td>
+
+<span class="badge bg-info">
+
+Today
+
+</span>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Measure Fish Growth</td>
+
+<td>
+
+<span class="badge bg-success">
+
+Completed
+
+</span>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Update Market Prices</td>
+
+<td>
+
+<span class="badge bg-primary">
+
+Scheduled
+
+</span>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="mt-5">
+
+<hr>
+
+<div class="text-center">
+
+<h4>
+
+🐟 Smart AquaFarm
+
+</h4>
+
+<p>
+
+Smart Aquaculture Farm Management System
+
+</p>
+
+<p>
+
+Developed using Flask • Oracle Database • Bootstrap 5
+
+</p>
+
+<p>
+
+Version 1.0 | © 2026 Smart AquaFarm. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+</div>
+
+<!-- End Main Content -->
+
+</div>
+
+<!-- End Wrapper -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

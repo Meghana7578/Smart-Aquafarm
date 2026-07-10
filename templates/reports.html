@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports & Analytics</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- ================= Sidebar ================= -->
+
+<div class="sidebar">
+
+<div class="logo">
+
+<h2>🐟 Smart AquaFarm</h2>
+
+</div>
+
+<ul>
+
+<li>
+
+<a href="/dashboard">
+
+<i class="bi bi-speedometer2"></i>
+
+Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/ponds">
+
+<i class="bi bi-water"></i>
+
+Pond Management
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/growthrecords">
+
+<i class="bi bi-graph-up-arrow"></i>
+
+Fish Growth
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/feedingrecords">
+
+<i class="bi bi-basket2-fill"></i>
+
+Feeding Schedule
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/waterqualityrecords">
+
+<i class="bi bi-droplet-fill"></i>
+
+Water Quality
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/diseaserecords">
+
+<i class="bi bi-bug-fill"></i>
+
+Disease Management
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/marketrecords">
+
+<i class="bi bi-currency-rupee"></i>
+
+Market Prices
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/reports" class="active">
+
+<i class="bi bi-bar-chart-fill"></i>
+
+Reports & Analytics
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/logout">
+
+<i class="bi bi-box-arrow-right"></i>
+
+Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- ================= Main Content ================= -->
+
+<div class="main-content">
+
+<div class="topbar">
+
+<h2>
+
+📊 Reports & Analytics
+
+</h2>
+
+<p>
+
+View farm statistics and analytics
+
+</p>
+
+</div>
+
+<!-- ================= Statistics ================= -->
+
+<div class="row mt-4">
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<i class="bi bi-water card-icon"></i>
+
+<h2>{{ total_ponds }}</h2>
+
+<p>Total Ponds</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<i class="bi bi-fish card-icon"></i>
+
+<h2>{{ total_fish }}</h2>
+
+<p>Total Fish</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<i class="bi bi-graph-up-arrow card-icon"></i>
+
+<h2>{{ growth_records }}</h2>
+
+<p>Growth Records</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="dashboard-card">
+
+<i class="bi bi-basket2-fill card-icon"></i>
+
+<h2>{{ feeding_records }}</h2>
+
+<p>Feeding Records</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-md-4">
+
+<div class="dashboard-card">
+
+<i class="bi bi-droplet-fill card-icon"></i>
+
+<h2>{{ water_records }}</h2>
+
+<p>Water Quality Records</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="dashboard-card">
+
+<i class="bi bi-bug-fill card-icon"></i>
+
+<h2>{{ disease_records }}</h2>
+
+<p>Disease Records</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="dashboard-card">
+
+<i class="bi bi-currency-rupee card-icon"></i>
+
+<h2>{{ market_records }}</h2>
+
+<p>Market Price Records</p>
+
+</div>
+
+</div>
+
+</div>
+
+<hr class="mt-5">
+
+<h3>
+
+Farm Analytics
+
+</h3>
+
+<div class="row mt-4">
+
+<div class="col-lg-6">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+Fish Growth Overview
+
+</div>
+
+<div class="card-body">
+
+<canvas id="growthChart" height="250"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="card shadow">
+
+<div class="card-header bg-success text-white">
+
+Module Summary
+
+</div>
+
+<div class="card-body">
+
+<canvas id="summaryChart" height="250"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-12">
+
+<div class="card shadow">
+
+<div class="card-header bg-dark text-white">
+
+Farm Summary
+
+</div>
+
+<div class="card-body">
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>Module</th>
+
+<th>Total Records</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Total Ponds</td>
+
+<td>{{ total_ponds }}</td>
+
+</tr>
+
+<tr>
+
+<td>Total Fish</td>
+
+<td>{{ total_fish }}</td>
+
+</tr>
+
+<tr>
+
+<td>Growth Records</td>
+
+<td>{{ growth_records }}</td>
+
+</tr>
+
+<tr>
+
+<td>Feeding Records</td>
+
+<td>{{ feeding_records }}</td>
+
+</tr>
+
+<tr>
+
+<td>Water Quality Records</td>
+
+<td>{{ water_records }}</td>
+
+</tr>
+
+<tr>
+
+<td>Disease Records</td>
+
+<td>{{ disease_records }}</td>
+
+</tr>
+
+<tr>
+
+<td>Market Price Records</td>
+
+<td>{{ market_records }}</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= Buttons ================= -->
+
+<div class="row mt-4">
+
+<div class="col-12 text-center">
+
+<a href="/dashboard" class="btn btn-primary btn-lg me-2">
+
+<i class="bi bi-house-fill"></i>
+
+Back to Dashboard
+
+</a>
+
+<a href="/downloadpdf" class="btn btn-danger btn-lg me-2">
+
+<i class="bi bi-file-earmark-pdf-fill"></i>
+
+Download PDF
+
+</a>
+
+<a href="/downloadexcel" class="btn btn-success btn-lg">
+
+<i class="bi bi-file-earmark-excel-fill"></i>
+
+Export Excel
+
+</a>
+
+</div>
+
+</div>
+
+<!-- ================= Footer ================= -->
+
+<footer class="mt-5">
+
+<hr>
+
+<div class="text-center">
+
+<h4>
+
+🐟 Smart AquaFarm
+
+</h4>
+
+<p>
+
+Smart Aquaculture Farm Management System
+
+</p>
+
+<p>
+
+Developed using Flask • Oracle Database • Bootstrap 5 • Chart.js
+
+</p>
+
+<p>
+
+Version 1.0 | © 2026 Smart AquaFarm. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+</div>
+
+<!-- End main-content -->
+
+</div>
+
+<!-- End wrapper -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const growthChart = document.getElementById("growthChart");
+
+new Chart(growthChart, {
+
+type: "bar",
+
+data: {
+
+labels: [
+
+"Growth",
+
+"Feeding",
+
+"Water",
+
+"Disease",
+
+"Market"
+
+],
+
+datasets: [{
+
+label: "Records",
+
+data: [
+
+{{ growth_records }},
+
+{{ feeding_records }},
+
+{{ water_records }},
+
+{{ disease_records }},
+
+{{ market_records }}
+
+],
+
+backgroundColor: [
+
+"#0d6efd",
+
+"#198754",
+
+"#0dcaf0",
+
+"#dc3545",
+
+"#ffc107"
+
+]
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+display:false
+
+}
+
+}
+
+}
+
+});
+
+const summaryChart = document.getElementById("summaryChart");
+
+new Chart(summaryChart,{
+
+type:"pie",
+
+data:{
+
+labels:[
+
+"Ponds",
+
+"Growth",
+
+"Feeding",
+
+"Water",
+
+"Disease",
+
+"Market"
+
+],
+
+datasets:[{
+
+data:[
+
+{{ total_ponds }},
+
+{{ growth_records }},
+
+{{ feeding_records }},
+
+{{ water_records }},
+
+{{ disease_records }},
+
+{{ market_records }}
+
+],
+
+backgroundColor:[
+
+"#0d6efd",
+
+"#198754",
+
+"#ffc107",
+
+"#0dcaf0",
+
+"#dc3545",
+
+"#6f42c1"
+
+]
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

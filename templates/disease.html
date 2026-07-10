@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Add Disease Record</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<link
+rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<div class="card shadow">
+
+<div class="card-header bg-danger text-white">
+
+<h2 class="text-center">
+
+🦠 Add Disease Record
+
+</h2>
+
+</div>
+
+<div class="card-body">
+
+<form action="/savedisease" method="POST">
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>
+
+Select Pond
+
+</label>
+
+<select
+name="pond_id"
+class="form-control"
+required>
+
+<option value="">
+
+-- Select Pond --
+
+</option>
+
+{% for pond in ponds %}
+
+<option value="{{ pond[0] }}">
+
+{{ pond[1] }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>
+
+Detection Date
+
+</label>
+
+<input
+type="date"
+name="detection_date"
+class="form-control"
+required>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>
+
+Disease Name
+
+</label>
+
+<input
+type="text"
+name="disease_name"
+class="form-control"
+placeholder="Example: White Spot"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>
+
+Treatment
+
+</label>
+
+<input
+type="text"
+name="treatment"
+class="form-control"
+placeholder="Example: Salt Treatment"
+required>
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Disease Status
+
+</label>
+
+<select
+name="status"
+class="form-control"
+required>
+
+<option value="">
+
+-- Select Status --
+
+</option>
+
+<option>
+
+Under Treatment
+
+</option>
+
+<option>
+
+Recovered
+
+</option>
+
+<option>
+
+Critical
+
+</option>
+
+</select>
+
+</div>
+<div class="text-center mt-4">
+
+<button
+type="submit"
+class="btn btn-danger btn-lg">
+
+<i class="bi bi-save"></i>
+
+Save Disease Record
+
+</button>
+
+<a
+href="/diseaserecords"
+class="btn btn-success btn-lg">
+
+<i class="bi bi-table"></i>
+
+View Records
+
+</a>
+
+<a
+href="/dashboard"
+class="btn btn-secondary btn-lg">
+
+<i class="bi bi-house-fill"></i>
+
+Dashboard
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- Disease Management Tips -->
+
+<div class="card shadow mt-4">
+
+<div class="card-header bg-warning">
+
+<h4>
+
+🦠 Disease Management Guidelines
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<h5>
+
+Early Detection
+
+</h5>
+
+<p>
+
+Inspect fish every day for unusual behavior or visible symptoms.
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h5>
+
+Treatment
+
+</h5>
+
+<p>
+
+Start treatment immediately after confirming the disease.
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h5>
+
+Monitoring
+
+</h5>
+
+<p>
+
+Keep checking recovery status until all fish are healthy.
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="alert alert-info">
+
+<b>Tip:</b> Maintaining good water quality and proper feeding greatly reduces disease outbreaks.
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="mt-5">
+
+<hr>
+
+<div class="text-center">
+
+<h5>
+
+🐟 Smart AquaFarm
+
+</h5>
+
+<p>
+
+Disease Management Module
+
+</p>
+
+<p>
+
+Developed using Flask • Oracle Database • Bootstrap 5
+
+</p>
+
+<p>
+
+© 2026 Smart AquaFarm. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
